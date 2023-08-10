@@ -17,10 +17,19 @@ Channels already scraped:
     - TEDEd
     - crashcourse
     - kurzgesagt
+    - Wendoverproductions
+    - AsapSCIENCE
+    - CGPGrey
+    - Fireship
+    - Vsauce
+    - NatGeo
+    - Vox
+    - NBCNews
+    - FoxNews
 """
 
 # Change this to the channel name you want to scrape
-CHANNEL_NAME = "kurzgesagt"
+CHANNEL_NAME = "FoxNews"
 
 
 driver = webdriver.Safari()
