@@ -45,12 +45,12 @@ for i in range(1):
                 print(title_and_creator_filename)
                 if title_and_creator_filename not in list_of_existing_files:
                     saved_count += 1
-                    urllib.request.urlretrieve(thumbnail_url, fr"./unlabeled_data/{title_and_creator_filename}")
+                    # urllib.request.urlretrieve(thumbnail_url, fr"./unlabeled_data/{title_and_creator_filename}")
         
         print()
-        print(f"Found {count} thumbnails")
-        print(f"Saved {saved_count} thumbnails")
-        print(f"Total Files: {len(os.listdir('./unlabeled_data'))}")
+        # print(f"Found {count} thumbnails")
+        # print(f"Saved {saved_count} thumbnails")
+        # print(f"Total Files: {len(os.listdir('./unlabeled_data'))}")
 
     if __name__ == "__main__":
         SCROLL_PAUSE_TIME = 0.3
