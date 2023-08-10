@@ -10,7 +10,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from pathvalidate import sanitize_filename
 
-for i in range(10):
+for i in range(30):
     driver = webdriver.Safari()
     driver.get('https://www.youtube.com/')
     driver.set_window_position(0, 0)
@@ -49,8 +49,7 @@ for i in range(10):
         print()
         print(f"Found {count} thumbnails")
         print(f"Saved {saved_count} thumbnails")
-
-
+        print(f"Total Files: {len(os.listdir('./unlabeled_data'))}")
 
     if __name__ == "__main__":
         SCROLL_PAUSE_TIME = 0.3
