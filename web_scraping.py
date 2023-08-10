@@ -10,7 +10,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from pathvalidate import sanitize_filename
 
-for i in range(30):
+for i in range(100):
     driver = webdriver.Safari()
     driver.get('https://www.youtube.com/')
     driver.set_window_position(0, 0)
