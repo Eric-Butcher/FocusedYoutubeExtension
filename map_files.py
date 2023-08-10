@@ -28,7 +28,7 @@ def get_titles_of_images_in_csv(csv_path):
         csv_reader = csv.reader(csv_file)
         next(csv_reader) # skip header
         for row in csv_reader:
-            images.append(row[1])
+            images.append(row[0])
     return images
 
 # find the images that are not in the csv file
@@ -51,13 +51,13 @@ def no_of_last_image_in_csv(csv_path):
             last_row = row
         if last_row is None:
             return 0
-        return int(last_row[2][:-4])
+        return int(last_row[1][:-4])
     
 # if the csv file is empty, write the header
 def write_header(csv_path):
     with open(csv_path, 'w') as csv_file:
         csv_writer = csv.writer(csv_file)
-        csv_writer.writerow(["label", "title", "path"])
+        csv_writer.writerow(["title", "path"])
 
 
 # add the images to the csv file with the image title and the path to the image file (which should be a number now)
@@ -66,12 +66,12 @@ def add_images_to_csv(dir_path, mapped_dir_path, csv_path):
     with open(csv_path, 'a') as csv_file:
         csv_writer = csv.writer(csv_file)
         image_number = no_of_last_image_in_csv(csv_path)
-        count = 0
         for image_title in titles_of_images_not_in_csv:
-            count += 1
-            image_path =  image_number + count + ".jpg"
-            csv_writer.writerow([0, image_title, image_path])
+            image_number += 1
+            image_path =  f"{image_number}.jpg"
+            csv_writer.writerow([image_title, image_path])
             shutil.copy(f"{dir_path}/{image_title}", f"{mapped_dir_path}/{image_path}")
+    csv_file.close()
 
 
 if __name__ == "__main__":
