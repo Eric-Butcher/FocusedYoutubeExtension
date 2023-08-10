@@ -26,11 +26,33 @@ Channels already scraped:
     - Vox
     - NBCNews
     - FoxNews
+    - MinutePhysics
+    - mitocw
+    - bigthink
+    - physicsgirl
+    - simonegiertz
+    - GeekGurlDiaries
+    - thebrainscoop
+    - JordanHarrod
+    - RealEngineering
+    - smartereveryday
+    - MarkRober
+    - NileRed
+    - armandohasudungan
+    - SebastianLague
+    - freecodecamp
+    - EverydayAstronaut
+
+    ===================
+
+    - JamesCharles
+    - PewDiePie
+    - emmachamberlain
+    - MrBeast
 """
 
 # Change this to the channel name you want to scrape
-CHANNEL_NAME = "FoxNews"
-
+CHANNEL_NAME = None
 
 driver = webdriver.Safari()
 driver.get(f'https://www.youtube.com/@{CHANNEL_NAME}/videos')
@@ -87,7 +109,7 @@ if __name__ == "__main__":
 
         if (new_no_of_video_boxex <= last_no_of_video_boxes) and (number_of_scroll_without_change > NUMBERS_OF_SCROLLS_WITHOUT_CHANGE_BEFORE_BREAK):
             reached_page_end = True
-        elif new_no_of_video_boxex >= 200:
+        elif new_no_of_video_boxex >= 100:
             reached_page_end = True
         elif (new_no_of_video_boxex <= last_no_of_video_boxes):
             number_of_scroll_without_change += 1
