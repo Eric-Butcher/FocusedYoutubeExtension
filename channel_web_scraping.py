@@ -10,7 +10,18 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from pathvalidate import sanitize_filename
 
-CHANNEL_NAME = "Veritasium"
+"""
+Channels already scraped:
+    - khanacademy
+    - veritasium
+    - TEDEd
+    - crashcourse
+    - kurzgesagt
+"""
+
+# Change this to the channel name you want to scrape
+CHANNEL_NAME = "kurzgesagt"
+
 
 driver = webdriver.Safari()
 driver.get(f'https://www.youtube.com/@{CHANNEL_NAME}/videos')
@@ -48,9 +59,11 @@ def find_and_save():
     print(f"Total Files: {len(os.listdir('./unlabeled_data'))}")
 
 if __name__ == "__main__":
-    SCROLL_PAUSE_TIME = 0.3
+    SCROLL_PAUSE_TIME = 0.5
     reached_page_end = False
     last_no_of_video_boxes = 0
+    NUMBERS_OF_SCROLLS_WITHOUT_CHANGE_BEFORE_BREAK = 20
+    number_of_scroll_without_change = 0
 
     while not reached_page_end:
         # Wait to load page
@@ -61,8 +74,17 @@ if __name__ == "__main__":
 
         # Check if page end is reached
         new_no_of_video_boxex = len(driver.find_elements(By.CLASS_NAME, "style-scope ytd-rich-item-renderer"))
-        if new_no_of_video_boxex == last_no_of_video_boxes:
+        print(f"New: {new_no_of_video_boxex}, Last: {last_no_of_video_boxes}, No Change: {number_of_scroll_without_change}")
+
+        if (new_no_of_video_boxex <= last_no_of_video_boxes) and (number_of_scroll_without_change > NUMBERS_OF_SCROLLS_WITHOUT_CHANGE_BEFORE_BREAK):
             reached_page_end = True
+        elif new_no_of_video_boxex >= 200:
+            reached_page_end = True
+        elif (new_no_of_video_boxex <= last_no_of_video_boxes):
+            number_of_scroll_without_change += 1
+        else:
+            last_no_of_video_boxes = new_no_of_video_boxex
+            number_of_scroll_without_change = 0
 
     find_and_save()
 
