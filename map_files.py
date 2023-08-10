@@ -26,6 +26,7 @@ def get_titles_of_images_in_csv(csv_path):
     images = []
     with open(csv_path, 'r') as csv_file:
         csv_reader = csv.reader(csv_file)
+        next(csv_reader) # skip header
         for row in csv_reader:
             images.append(row[1])
     return images
@@ -44,6 +45,7 @@ def get_titles_of_images_not_in_csv(dir_path, csv_path):
 def no_of_last_image_in_csv(csv_path):
     with open(csv_path, 'r') as csv_file:
         csv_reader = csv.reader(csv_file)
+        next(csv_reader) # skip header
         last_row = None
         for row in csv_reader:
             last_row = row
