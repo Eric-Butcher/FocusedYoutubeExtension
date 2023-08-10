@@ -106,7 +106,7 @@ class LabelingApp(App):
         
         updated_image_title = self.valid_titles[self.index]
         file_name = self.valid_titles_dict[updated_image_title]
-        self.image.source = f"./{self.mapped_unlabeled_data_dir}/{file_name}"
+        self.image.source = f"{self.mapped_unlabeled_data_dir}/{file_name}"
         self.image_title.text = updated_image_title[:-4]
 
     def label_image(self, category):
