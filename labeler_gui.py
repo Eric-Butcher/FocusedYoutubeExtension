@@ -8,16 +8,22 @@ import os
 import time
 import csv
 import shutil
+from pathlib import Path
 
 """
 Requires:
     Kivy - Installation: python -m pip install "kivy[full]" kivy_examples
 """
 
-UNLABELED_CSV_PATH = './mapped.csv'
-LABELED_CSV_PATH = './labeled_mapped.csv'
-MAPPED_UNLABELED_DATA_DIR = './mapped_unlabeled_data'
-BLACKLISTED_CSV_PATH = './blacklisted.csv'
+# UNLABELED_CSV_PATH = './mapped.csv'
+# LABELED_CSV_PATH = './labeled_mapped.csv'
+# MAPPED_UNLABELED_DATA_DIR = './mapped_unlabeled_data'
+# BLACKLISTED_CSV_PATH = './blacklisted.csv'
+
+UNLABELED_CSV_PATH = Path.cwd() / 'mapped.csv'
+LABELED_CSV_PATH = Path.cwd() / 'labeled_mapped.csv'
+MAPPED_UNLABELED_DATA_DIR = Path.cwd() / 'mapped_unlabeled_data'
+BLACKLISTED_CSV_PATH = Path.cwd() / 'blacklisted.csv'
 
 class LabelingApp(App):
     # , unlabeled_csv_path, labeled_csv_path, blacklisted_csv_path, mapped_unlabeled_data_dir
@@ -110,14 +116,14 @@ class LabelingApp(App):
         self.image_title.text = updated_image_title[:-4]
 
     def label_image(self, category):
-        with open(self.labeled_csv_path, 'a') as csv_file:
+        with open(self.labeled_csv_path, 'a', encoding='utf-8', newline='') as csv_file:
             csv_writer = csv.writer(csv_file)
             csv_writer.writerow([category, self.image_title.text, self.image.source])
 
     # get list of images already in the unlabeled csv file
     def get_titles_of_images_in_unlabeled_csv(self, csv_path):
         unlabeled_images = {}
-        with open(csv_path, 'r') as csv_file:
+        with open(csv_path, 'r', encoding='utf-8', newline='') as csv_file:
             csv_reader = csv.reader(csv_file)
             next(csv_reader) # skip header
             for row in csv_reader:
@@ -127,17 +133,20 @@ class LabelingApp(App):
     # get list of images already in the labeled csv file
     def get_titles_of_images_in_labeled_csv(self, csv_path):
         labeled_images = {}
-        with open(csv_path, 'r') as csv_file:
+        with open(csv_path, 'r', encoding='utf-8', newline='') as csv_file:
             csv_reader = csv.reader(csv_file)
             next(csv_reader) # skip header
             for row in csv_reader:
-                labeled_images[row[1]] = row[2]
+                label: str = row[0]
+                title: str = row[1]
+                path: str = row[2]
+                labeled_images[title] = path
         return labeled_images
     
     # get list of blacklisted images already in the blacklisted csv file
     def get_titles_of_images_in_blacklisted_csv(self, csv_path):
         blacklisted_images = {}
-        with open(csv_path, 'r') as csv_file:
+        with open(csv_path, 'r', encoding='utf-8', newline='') as csv_file:
             csv_reader = csv.reader(csv_file)
             next(csv_reader) # skip header
             for row in csv_reader:
@@ -145,7 +154,7 @@ class LabelingApp(App):
         return blacklisted_images
     
     def remove_image(self):
-        with open(self.blacklisted_csv_path, 'a') as csv_file:
+        with open(self.blacklisted_csv_path, 'a', encoding='utf-8', newline='') as csv_file:
             csv_writer = csv.writer(csv_file)
             csv_writer.writerow([self.image_title.text, self.image.source])
 
@@ -164,13 +173,13 @@ class LabelingApp(App):
         self.image_title.text = f"Number of images labeled: {len(labeled_titles_dict)}\nNumber of images to label: {len(valid_titles_dict)}"
         return valid_titles_dict.keys(), valid_titles_dict
 
-if __name__ == '__main__':
+def main():
     if (not os.path.exists(LABELED_CSV_PATH)) or (os.stat(LABELED_CSV_PATH).st_size == 0):
-        with open(LABELED_CSV_PATH, 'w') as csv_file:
+        with open(LABELED_CSV_PATH, 'w', encoding='utf-8', newline='') as csv_file:
             csv_writer = csv.writer(csv_file)
             csv_writer.writerow(["label", "title", "path"])
     if (not os.path.exists(BLACKLISTED_CSV_PATH)) or (os.stat(BLACKLISTED_CSV_PATH).st_size == 0):
-        with open(BLACKLISTED_CSV_PATH, 'w') as csv_file:
+        with open(BLACKLISTED_CSV_PATH, 'w', encoding='utf-8', newline='') as csv_file:
             csv_writer = csv.writer(csv_file)
             csv_writer.writerow(["title", "path"])
 
@@ -180,3 +189,6 @@ if __name__ == '__main__':
         blacklisted_csv_path=BLACKLISTED_CSV_PATH,
         mapped_unlabeled_data_dir=MAPPED_UNLABELED_DATA_DIR
     ).run()
+
+if __name__ == '__main__':
+    main()
