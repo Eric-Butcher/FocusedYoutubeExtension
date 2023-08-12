@@ -15,11 +15,6 @@ Requires:
     Kivy - Installation: python -m pip install "kivy[full]" kivy_examples
 """
 
-# UNLABELED_CSV_PATH = './mapped.csv'
-# LABELED_CSV_PATH = './labeled_mapped.csv'
-# MAPPED_UNLABELED_DATA_DIR = './mapped_unlabeled_data'
-# BLACKLISTED_CSV_PATH = './blacklisted.csv'
-
 UNLABELED_CSV_PATH = Path.cwd() / 'mapped.csv'
 LABELED_CSV_PATH = Path.cwd() / 'labeled_mapped.csv'
 MAPPED_UNLABELED_DATA_DIR = Path.cwd() / 'mapped_unlabeled_data'
@@ -111,14 +106,14 @@ class LabelingApp(App):
             time.sleep(600)
         
         updated_image_title = self.valid_titles[self.index]
-        file_name = self.valid_titles_dict[updated_image_title]
-        self.image.source = f"{self.mapped_unlabeled_data_dir}/{file_name}"
-        self.image_title.text = updated_image_title[:-4]
+        self.file_name = self.valid_titles_dict[updated_image_title]
+        self.image.source = f"{self.mapped_unlabeled_data_dir}/{self.file_name}"
+        self.image_title.text = updated_image_title
 
     def label_image(self, category):
         with open(self.labeled_csv_path, 'a', encoding='utf-8', newline='') as csv_file:
             csv_writer = csv.writer(csv_file)
-            csv_writer.writerow([category, self.image_title.text, self.image.source])
+            csv_writer.writerow([category, self.image_title.text, self.file_name])
 
     # get list of images already in the unlabeled csv file
     def get_titles_of_images_in_unlabeled_csv(self, csv_path):
@@ -137,10 +132,10 @@ class LabelingApp(App):
             csv_reader = csv.reader(csv_file)
             next(csv_reader) # skip header
             for row in csv_reader:
-                label: str = row[0]
-                title: str = row[1]
-                path: str = row[2]
-                labeled_images[title] = path
+                image_label: str = row[0]
+                image_title: str = row[1]
+                image_path: str = row[2]
+                labeled_images[image_title] = image_path
         return labeled_images
     
     # get list of blacklisted images already in the blacklisted csv file
@@ -150,21 +145,27 @@ class LabelingApp(App):
             csv_reader = csv.reader(csv_file)
             next(csv_reader) # skip header
             for row in csv_reader:
-                blacklisted_images[row[0]] = row[1]
+                image_title: str = row[0]
+                image_path: str = row[1]
+                blacklisted_images[image_title] = image_path
         return blacklisted_images
     
     def remove_image(self):
         with open(self.blacklisted_csv_path, 'a', encoding='utf-8', newline='') as csv_file:
             csv_writer = csv.writer(csv_file)
-            csv_writer.writerow([self.image_title.text, self.image.source])
+            csv_writer.writerow([self.image_title.text, self.file_name])
 
     def get_valid_titles(self):
         all_titles_dict = self.get_titles_of_images_in_unlabeled_csv(self.unlabeled_csv_path)
         labeled_titles_dict = self.get_titles_of_images_in_labeled_csv(self.labeled_csv_path)
         blacklisted_titles_dict = self.get_titles_of_images_in_blacklisted_csv(self.blacklisted_csv_path)
 
+        all_titles = list(all_titles_dict.keys())
+        labeled_titles = list(labeled_titles_dict.keys())
+        blacklisted_titles = list(blacklisted_titles_dict.keys())
+
         # get list of titles that are not in the labeled csv file and the blacklisted csv file
-        valid_titles = [item for item in all_titles_dict if ((item not in labeled_titles_dict) and (item not in blacklisted_titles_dict))] 
+        valid_titles = [item for item in all_titles if ((item not in labeled_titles) and (item not in blacklisted_titles))] 
         valid_titles_dict = {k: all_titles_dict[k] for k in valid_titles}
         
         print(f"Total number of images: {len(all_titles_dict)}")
