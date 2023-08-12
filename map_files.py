@@ -69,7 +69,7 @@ def add_images_to_csv(dir_path, mapped_dir_path, csv_path):
         for image_title in titles_of_images_not_in_csv:
             image_number += 1
             image_path =  f"{image_number}.jpg"
-            csv_writer.writerow([image_title, image_path])
+            csv_writer.writerow([image_title[:-4], image_path])
             shutil.copy(f"{dir_path}/{image_title}", f"{mapped_dir_path}/{image_path}")
     csv_file.close()
 
