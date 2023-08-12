@@ -21,7 +21,6 @@ MAPPED_UNLABELED_DATA_DIR = Path.cwd() / 'mapped_unlabeled_data'
 BLACKLISTED_CSV_PATH = Path.cwd() / 'blacklisted.csv'
 
 class LabelingApp(App):
-    # , unlabeled_csv_path, labeled_csv_path, blacklisted_csv_path, mapped_unlabeled_data_dir
     def __init__(self, unlabeled_csv_path, labeled_csv_path, blacklisted_csv_path, mapped_unlabeled_data_dir, **kwargs):
         super().__init__(**kwargs)
         self.unlabeled_csv_path = unlabeled_csv_path
@@ -31,7 +30,6 @@ class LabelingApp(App):
         
     def build(self):
         self.layout = BoxLayout(orientation='vertical', padding=50, spacing=10)
-        # Window.maximize()
 
         self.image = Image(source='')
         self.image.allow_stretch = True
