@@ -1,0 +1,18 @@
+TinyBert | lr: 5e-5 | Test Acc: XXXXXX
+TinyBert | lr: 5e-6 | Test Acc: XXXXXX
+
+TinyBert > 1024 | lr: 5e-5 | Test Acc: XXXXXX
+TinyBert > 1024 | lr: 5e-6 | Test Acc: XXXXXX
+TinyBert > 1024 | Dropout: 0.2 | lr: 5e-5 | Test Acc: XXXXXX
+TinyBert > 1024 | Dropout: 0.2 | lr: 5e-6 | Test Acc: XXXXXX
+
+TinyBert > 1024 > 512 | lr: 5e-5 | Test Acc: 0.8599
+TinyBert > 1024 > 512 | lr: 5e-6 | Test Acc: XXXXXX
+TinyBert > 1024 > 512 | Dropout: 0.2 | lr: 5e-5 | Test Acc: XXXXXX
+TinyBert > 1024 > 512 | Dropout: 0.2 | lr: 5e-6 | Test Acc: XXXXXX
+
+TinyBert > 1024 > 512 > 256 | lr: 5e-5 | Test Acc: XXXXXX
+TinyBert > 1024 > 512 > 256 | lr: 5e-6 | Test Acc: XXXXXX
+TinyBert > 1024 > 512 > 256 | Dropout: 0.2 | lr: 5e-5 | Test Acc: XXXXXX
+TinyBert > 1024 > 512 > 256 | Dropout: 0.2 | lr: 5e-6 | Test Acc: XXXXXX
+
