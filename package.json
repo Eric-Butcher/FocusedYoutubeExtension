@@ -1,6 +1,0 @@
-{
-    "type": "module",
-    "dependencies": {
-        "@xenova/transformers": "^2.5.1"
-    }
-}
