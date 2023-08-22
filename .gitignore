@@ -2,3 +2,6 @@ mapped_unlabeled_data
 blacklisted.csv
 labeled_mapped.csv
 mapped.csv
+node_modules
+node_modules
+unlabeled_data
