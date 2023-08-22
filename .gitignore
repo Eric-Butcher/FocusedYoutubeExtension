@@ -1,4 +1,7 @@
-tinybert_fine_tuned
 node_modules
 mapped_unlabeled_data
+labeled_mapped.csv
+unlabeled_data
+node_modules
+blacklisted.csv
 labeled_mapped.csv
