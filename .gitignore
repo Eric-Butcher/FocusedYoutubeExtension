@@ -1,10 +1,14 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/youtube_web_scrapping
 labeled_mapped.csv
 blacklisted.csv
 unlabeled_data
 mapped_unlabeled_data
 mapped.csv
+<<<<<<< HEAD
 node_modules
 unlabeled_data
 labeled_mapped.csv
@@ -22,3 +26,5 @@ unlabeled_data
 >>>>>>> thumbnail-only-classifier
 =======
 >>>>>>> title-only-classifier
+=======
+>>>>>>> origin/youtube_web_scrapping
