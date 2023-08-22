@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 labeled_mapped.csv
 blacklisted.csv
 unlabeled_data
@@ -9,10 +10,15 @@ unlabeled_data
 labeled_mapped.csv
 blacklisted.csv
 =======
+=======
+>>>>>>> title-only-classifier
 tinybert_fine_tuned
 node_modules
 mapped_unlabeled_data
 labeled_mapped.csv
+<<<<<<< HEAD
 blacklisted.csv
 unlabeled_data
 >>>>>>> thumbnail-only-classifier
+=======
+>>>>>>> title-only-classifier
