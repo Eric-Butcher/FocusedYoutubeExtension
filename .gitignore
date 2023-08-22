@@ -1,7 +1,13 @@
-mapped_unlabeled_data
-blacklisted.csv
 labeled_mapped.csv
+blacklisted.csv
+unlabeled_data
+mapped_unlabeled_data
 mapped.csv
 node_modules
-node_modules
 unlabeled_data
+labeled_mapped.csv
+blacklisted.csv
+node_modules
+mapped_unlabeled_data
+labeled_mapped.csv
+
