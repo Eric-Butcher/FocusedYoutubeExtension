@@ -1,7 +1,8 @@
 import pandas as pd
+import os
 from pathlib import Path
 
-LABELED_CSV_PATH = Path.cwd() / 'labeled_mapped.csv'
+LABELED_CSV_PATH = os.path.join(os.getcwd(), 'secret_stuff', 'labeled_mapped.csv')
 
 def main(labeled_csv_path):
     df = pd.read_csv(labeled_csv_path)

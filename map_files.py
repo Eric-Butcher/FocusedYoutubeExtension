@@ -12,9 +12,9 @@ import shutil
     label, title, path
 """
 
-DIR_PATH = "./unlabeled_data"
-MAPPED_DIR_PATH = "./mapped_unlabeled_data"
-CSV_PATH = "./mapped.csv"
+DIR_PATH = os.path.join(os.getcwd(), 'secret_stuff', 'unlabeled_data')
+MAPPED_DIR_PATH = os.path.join(os.getcwd(), 'secret_stuff', 'mapped_unlabeled_data')
+CSV_PATH = os.path.join(os.getcwd(), 'secret_stuff', 'mapped.csv')
 
 # get list of images in the directory
 def get_titles_of_images__in_dir(dir_path):
