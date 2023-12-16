@@ -7,3 +7,4 @@ node_modules
 unlabeled_data
 blacklisted.csv
 labeled_mapped.csv
+secret_stuff
